@@ -6,60 +6,83 @@ This project deploys a cloud-native e-commerce application using Kubernetes on G
 
 ## 📦 Included Services
 ```mermaid
-graph TD
-    %% Load Generator Section
-    subgraph Load Generator
-        LG[Load Generator]
-    end
-    
-    %% Frontend Services
-    subgraph Frontend Services
-        FE[Frontend]
-    end
-    
-    %% Redis Cache
-    subgraph Data Layer
-        RC[(Redis Cache)]
-    end
-    
-    %% Backend Services
-    subgraph Backend Services
-        PC[Product Catalog]
-        REC[Recommendation]
-        CART[Cart]
-        SHIP[Shipping]
-        CURR[Currency]
-        PAY[Payment]
-        EMAIL[Email]
-    end
-    
-    %% Connections
-    LG -->|HTTP| FE
-    LG -->|HTTP| CO
-    FE -->|HTTP| CO
-    FE -->|gRPC| PC
-    FE -->|gRPC| REC
-    FE -->|gRPC| CART
-    FE -->|gRPC| SHIP
-    FE -->|gRPC| CURR
-    
-    CART -->|TCP| RC
-    REC -->|TCP| RC
-    PC -->|TCP| RC
-    SHIP -->|TCP| RC
-    CURR -->|TCP| RC
-    PAY -->|TCP| RC
-    EMAIL -->|TCP| RC
+flowchart TD
+  %% Legend
+  subgraph Legend
+    direction TB
+    HTTP[<b>HTTP</b>] -->|Requests| dest1[( )]
+    gRPC[<b>gRPC</b>] -->|RPC| dest2[( )]
+    TCP[<b>TCP</b>] -->|Cache| dest3[( )]
+  end
 
-    %% Styling
-    classDef loadgen fill:#FF6F00,stroke:#E65100;
-    classDef frontend fill:#4CAF50,stroke:#388E3C;
-    classDef backend fill:#2196F3,stroke:#0D47A1;
-    classDef database fill:#FF5722,stroke:#E64A19;
-    class LG loadgen;
-    class FE,CO frontend;
-    class PC,REC,CART,SHIP,CURR,PAY,EMAIL backend;
-    class RC database;
+  %% Load Generator
+  subgraph "Load Generator"
+    direction LR
+    LG[Load Generator]
+    LG -- HTTP --> APIGW
+  end
+
+  %% API Gateway
+  subgraph "API Gateway"
+    direction LR
+    APIGW[API Gateway]
+  end
+
+  %% Frontend
+  subgraph "Edge / Client"
+    direction LR
+    FE[Web & Mobile Frontend]
+    FE -- HTTP --> APIGW
+  end
+
+  %% Backend Services
+  subgraph "Backend Services"
+    direction LR
+    PC[Product Catalog]
+    REC[Recommendation]
+    CART[Cart]
+    SHIP[Shipping]
+    CURR[Currency]
+    PAY[Payment]
+    EMAIL[Email Notification]
+  end
+
+  %% Data Layer
+  subgraph "Data Layer"
+    direction LR
+    RC[(Redis Cache)]
+  end
+
+  %% Service Connections
+  APIGW -- gRPC --> PC
+  APIGW -- gRPC --> REC
+  APIGW -- gRPC --> CART
+  APIGW -- gRPC --> SHIP
+  APIGW -- gRPC --> CURR
+  APIGW -- gRPC --> PAY
+  APIGW -- gRPC --> EMAIL
+
+  CART  -- TCP --> RC
+  REC   -- TCP --> RC
+  PC    -- TCP --> RC
+  SHIP  -- TCP --> RC
+  CURR  -- TCP --> RC
+  PAY   -- TCP --> RC
+  EMAIL -- TCP --> RC
+
+  %% Styling
+  classDef loadgen fill:#FFA726,stroke:#FB8C00,stroke-width:2px;
+  classDef gateway  fill:#FFCC80,stroke:#EF6C00,stroke-width:2px;
+  classDef edge     fill:#A5D6A7,stroke:#388E3C,stroke-width:2px;
+  classDef backend  fill:#90CAF9,stroke:#1E88E5,stroke-width:2px;
+  classDef database fill:#FFAB91,stroke:#D84315,stroke-width:2px;
+
+  class LG loadgen;
+  class APIGW gateway;
+  class FE edge;
+  class PC,REC,CART,SHIP,CURR,PAY,EMAIL backend;
+  class RC database;
+
 ```
 | Service                  | Port  | Replicas | Function                         |
 |--------------------------|-------|----------|----------------------------------|
