@@ -50,6 +50,6 @@ Open http://<EXTERNAL_IP> in your browser.
 kubectl delete -f microservices-demo.yaml
 ```
 ## 📜 License
-This deployment configuration is licensed under the Apache License 2.0.
-The microservices application is owned by Google. See original repo for details.
+* This deployment configuration is licensed under the Apache License 2.0.
+* The microservices application is owned by Google. See original [repo](https://github.com/GoogleCloudPlatform/microservices-demo) for details.
   
