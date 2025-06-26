@@ -28,7 +28,7 @@ flowchart TD
     APIGW[API Gateway]
   end
 
-  %% Frontend
+  %% Edge / Client
   subgraph "Edge / Client"
     direction LR
     FE[Web & Mobile Frontend]
@@ -82,7 +82,6 @@ flowchart TD
   class FE edge;
   class PC,REC,CART,SHIP,CURR,PAY,EMAIL backend;
   class RC database;
-
 ```
 | Service                  | Port  | Replicas | Function                         |
 |--------------------------|-------|----------|----------------------------------|
