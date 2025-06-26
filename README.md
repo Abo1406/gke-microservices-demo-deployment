@@ -5,6 +5,62 @@
 This project deploys a cloud-native e-commerce application using Kubernetes on GKE. The deployment is based on Google's [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) with custom configurations optimized for GKE.
 
 ## 📦 Included Services
+```mermaid
+graph TD
+    %% Load Generator Section
+    subgraph Load Generator
+        LG[Load Generator]
+    end
+    
+    %% Frontend Services
+    subgraph Frontend Services
+        FE[Frontend]
+    end
+    
+    %% Redis Cache
+    subgraph Data Layer
+        RC[(Redis Cache)]
+    end
+    
+    %% Backend Services
+    subgraph Backend Services
+        PC[Product Catalog]
+        REC[Recommendation]
+        CART[Cart]
+        SHIP[Shipping]
+        CURR[Currency]
+        PAY[Payment]
+        EMAIL[Email]
+    end
+    
+    %% Connections
+    LG -->|HTTP| FE
+    LG -->|HTTP| CO
+    FE -->|HTTP| CO
+    FE -->|gRPC| PC
+    FE -->|gRPC| REC
+    FE -->|gRPC| CART
+    FE -->|gRPC| SHIP
+    FE -->|gRPC| CURR
+    
+    CART -->|TCP| RC
+    REC -->|TCP| RC
+    PC -->|TCP| RC
+    SHIP -->|TCP| RC
+    CURR -->|TCP| RC
+    PAY -->|TCP| RC
+    EMAIL -->|TCP| RC
+
+    %% Styling
+    classDef loadgen fill:#FF6F00,stroke:#E65100;
+    classDef frontend fill:#4CAF50,stroke:#388E3C;
+    classDef backend fill:#2196F3,stroke:#0D47A1;
+    classDef database fill:#FF5722,stroke:#E64A19;
+    class LG loadgen;
+    class FE,CO frontend;
+    class PC,REC,CART,SHIP,CURR,PAY,EMAIL backend;
+    class RC database;
+```
 | Service                  | Port  | Replicas | Function                         |
 |--------------------------|-------|----------|----------------------------------|
 | `frontend`               | 8080  | 2        | Web interface (LoadBalancer)     |
