@@ -1,8 +1,12 @@
-# GKE Microservices Demo Deployment  
+# GKE Microservices Demo Deployment with Helm Charts  
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)  
-> Kubernetes deployment of Google's microservices demo on Google Kubernetes Engine (GKE).
+> Production-ready Kubernetes deployment of Google's microservices demo on GKE using Helm
 
-This project deploys a cloud-native e-commerce application using Kubernetes on GKE. The deployment is based on Google's [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) with custom configurations optimized for GKE.
+This project implements a cloud-native e-commerce application on GKE with:
+- **Helm-based deployment** for environment management
+- **GitOps-ready structure** with separate value files
+- **Optimized configurations** for GKE environments
+- **Automated service discovery** via Kubernetes DNS
 
 ## 📦 Included Services
 ```mermaid
