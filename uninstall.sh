@@ -1,5 +1,5 @@
+#!/bin/bash
 helm uninstall rediscart 
-
 helm uninstall emailservice 
 helm uninstall cartservice 
 helm uninstall currencyservice
