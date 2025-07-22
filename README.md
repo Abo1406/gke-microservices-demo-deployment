@@ -108,10 +108,17 @@ flowchart TD
 
 ## 🚀 Deployment Steps
 ### Prerequisites
-- Google Cloud Project with billing enabled
-- [gcloud CLI](https://cloud.google.com/sdk/docs/install) installed
-- Kubernetes cluster running on GKE
-- Helm
+- A Google Cloud Project with billing enabled.
+
+- gcloud CLI: Installation Guide
+- Authenticate and set your project:
+  ```bash
+     gcloud auth login
+     gcloud config set project [YOUR_PROJECT_ID]
+  ```
+- kubectl: Installed and configured to interact with your cluster.
+- Helm v3: [![Installation Guide](https://helm.sh/docs/intro/install/)
+- A running GKE Cluster: GKE Quickstart
 
 ### 1. Deploy using Helm
 ```bash
