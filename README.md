@@ -117,7 +117,7 @@ flowchart TD
      gcloud config set project [YOUR_PROJECT_ID]
   ```
 - kubectl: Installed and configured to interact with your cluster.
-- Helm v3: [![Installation Guide](https://helm.sh/docs/intro/install/)
+- Helm v3: [Installation Guide](https://helm.sh/docs/intro/install/)
 - A running GKE Cluster: GKE Quickstart
 
 ### 1. Deploy using Helm
