@@ -106,19 +106,30 @@ flowchart TD
 - Google Cloud Project with billing enabled
 - [gcloud CLI](https://cloud.google.com/sdk/docs/install) installed
 - Kubernetes cluster running on GKE
+- Helm
 
-### 1. Apply Kubernetes Configuration
+### 1. Deploy using Helm
 ```bash
-kubectl apply -f microservices-demo.yaml
+# Option 1: Install individual service
+helm install checkoutservice charts/microservice -f values/checkout-service-values.yaml
+
+# Option 2: Full deployment (using helmfile)
+helmfile sync
+
+# Option 3: One-click install
+./install.sh
 ```
 ### 2. Verify Deployment Status
 ```bash
-kubectl get deployments
-kubectl get services  # Note the EXTERNAL-IP of `frontend`
+helm list
+kubectl get pods
+kubectl get service frontend  # Note EXTERNAL-IP
 ```
 ### 3. Access the Application
 ```bash
 kubectl get service frontend
+Or
+open http://$(kubectl get svc frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 ```
 Open http://<EXTERNAL_IP> in your browser.
 
@@ -129,7 +140,11 @@ Open http://<EXTERNAL_IP> in your browser.
 * Environment Variables: Service discovery via Kubernetes DNS (e.g., CART_SERVICE_ADDR: "cartservice:7070").
 ## 🧹 Cleanup
 ```bash
-kubectl delete -f microservices-demo.yaml
+# Full uninstall
+./uninstall.sh
+
+# Selective removal
+helm uninstall checkoutservice
 ```
 ## 📜 License
 * This deployment configuration is licensed under the Apache License 2.0.
