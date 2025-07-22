@@ -1,6 +1,6 @@
 appName: cartservice
 appImage: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice
-appVersion: v0.8.0
+appVersion: v0.10.3
 appReplicas: 2
 containerPort: 7070
 containerEnvVars: 
