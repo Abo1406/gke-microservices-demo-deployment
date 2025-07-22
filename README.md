@@ -1,9 +1,11 @@
-# GKE Microservices Demo Deployment with Helm Charts  
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)  
+# GKE Microservices Demo Deployment with Helm
+
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 [![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&logoColor=white)](https://helm.sh)
 [![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
-> Production-ready Kubernetes deployment of Google's microservices demo on GKE using Helm
+
+This repository provides a production-ready Helm chart for deploying Google's **Online Boutique** microservices demo onto a Google Kubernetes Engine (GKE) cluster. It is designed for easy, repeatable, and configurable deployments suitable for demonstrations and testing environments.
 
 This project implements a cloud-native e-commerce application on GKE with:
 - **Helm-based deployment** for environment management
