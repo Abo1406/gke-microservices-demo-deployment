@@ -118,7 +118,7 @@ flowchart TD
   ```
 - kubectl: Installed and configured to interact with your cluster.
 - Helm v3: [Installation Guide](https://helm.sh/docs/intro/install/)
-- A running GKE Cluster: GKE Quickstart
+- A running GKE Cluster: [GKE Quickstart](https://helm.sh/docs/intro/install/)
 
 ### 1. Deploy using Helm
 ```bash
